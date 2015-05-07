@@ -22,11 +22,14 @@ public:
     ~Intro();
 
 private:
+    char *boxPortName;
+    char *pcPortName;
     char *commOff;
     char *currentVals;
     char *unknown;
     char *quest;
-    double temperature;
+    double wetTemp;
+    double dryTemp;
     double humidity;
 
 signals:

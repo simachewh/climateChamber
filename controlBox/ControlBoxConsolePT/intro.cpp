@@ -2,12 +2,13 @@
 #include <QDebug>
 
 Intro::Intro(QObject *parent) : QObject(parent),
-    currentVals("0B<COMMUNICATION OFF>\n"),
-    commOff("0A+022.50 +015.82 49.0\n"),
-    unknown("0I????????????\n"),
-    quest("x0006"),
-    temperature(20.13) ,
-    humidity(40.07)
+    currentVals("0A+022.50 +015.82 49.0\n"),
+        commOff("0B<COMMUNICATION OFF>\n"),
+        unknown("0I????????????\n"),
+        quest("x0006\n"),
+        dryTemp(25.13) ,
+        wetTemp(20.75),
+        humidity(40.07)
 {
     portInfo = new QSerialPortInfo();
     serial = new QSerialPort(this);
@@ -46,15 +47,24 @@ void Intro::boxTimer(){
 }
 
 //
+//"0A+022.50 +015.82 49.0\n"
 void Intro::initValues(){
 
-    if(temperature < 70.00 ){
-        temperature += 3.95;
+    if(dryTemp < 150 ){
+        dryTemp += 3.95;
     }
 
-    if(humidity < 70){
+    if(humidity < 150){
         humidity += 3.89;
     }
-    //022.50 +015.82 49.0\n
-    currentVals = "0A+";
+    wetTemp = dryTemp - humidity/20;
+
+    QString ss = "0A+" + QString("%1").arg(dryTemp, 6, 'f', 2, '0') + " +"
+            + QString("%1").arg(wetTemp, 6, 'f', 2, '0') + " +"
+            + QString("%1").arg(humidity, 6, 'f', 2, '0') + "\n";
+
+            //QString("%1%2").arg(humidity < 100 ? "0" : "").arg(humidity) + "\n";
+    qDebug() << ss<< endl;
+    QByteArray baStr = ss.toLatin1();
+    currentVals = baStr.data();
 }
