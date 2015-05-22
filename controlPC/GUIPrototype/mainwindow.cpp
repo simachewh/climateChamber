@@ -6,8 +6,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     ui->stackedWidget->setCurrentIndex(0);
     ui->monitorButton->setEnabled(false);
+
+//    QPalette palette = ui->c1Label->palette();
+//    palette.setColor(ui->c1Label->backgroundRole(), Qt::yellow);
+//    palette.setColor(ui->c1Label->foregroundRole(), Qt::yellow);
+//    ui->c1Label->setPalette(palette);
 }
 
 MainWindow::~MainWindow()
