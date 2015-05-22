@@ -1,7 +1,10 @@
 #include "status.h"
 
+
+
 Status::Status(QObject *parent) : QObject(parent)
 {
+    content = new QString();
     serial = new QSerialPort(this);
     connect(serial, SIGNAL(readyRead()), this, SLOT(readData()));
 }
@@ -16,13 +19,20 @@ void Status::openPort(){
     serial->setDataBits(QSerialPort::Data8);
     serial->setStopBits(QSerialPort::OneStop);
     serial->setParity(QSerialPort::NoParity);
-    *open = serial->open(QIODevice::ReadWrite);
+    if(!serial->isOpen()){
+        serial->open(QIODevice::ReadWrite);
+    }
+
 }
 
 QByteArray Status::readData(){
     QByteArray ret = serial->readAll();
     //*content = QString(ret);
-    setContent(QString(ret));
+    //*content = "";
+    (*content)= (QString(ret));
+    emit contentChanged(*content);
+    //setContent(QString(ret));
+    //qDebug() << "from readData" << ret;
     return ret;
 }
 
@@ -32,7 +42,9 @@ QString *Status::getContent(){
 }
 
 void Status::setContent(QString data){
+    *content = "";
     *content = data;
+    qDebug() <<" from setContent, content = " << *content;
     emit contentChanged(*content);
 }
 

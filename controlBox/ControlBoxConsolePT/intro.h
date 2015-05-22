@@ -12,12 +12,13 @@ public:
     QSerialPort *serial;
     QTimer *timer;
 
+
     void opPort();
     void conPort();
-    void wrToPort(char*);
     void disConPort();
     void clPort();
     void initValues();
+    void wrToPort(char *data);
     explicit Intro(QObject *parent = 0);
     ~Intro();
 
@@ -36,6 +37,7 @@ signals:
 
 public slots:
     void boxTimer();
+    QByteArray readPort();
 };
 
 #endif // INRO_H

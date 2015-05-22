@@ -2,10 +2,10 @@
 #include <QDebug>
 
 Intro::Intro(QObject *parent) : QObject(parent),
-    currentVals("0A+022.50 +015.82 49.0\n"),
+        currentVals("0A+022.50 +015.82 49.0\n"),
         commOff("0B<COMMUNICATION OFF>\n"),
         unknown("0I????????????\n"),
-        quest("x0006\n"),
+        quest("06"),
         dryTemp(25.13) ,
         wetTemp(20.75),
         humidity(40.07)
@@ -13,8 +13,12 @@ Intro::Intro(QObject *parent) : QObject(parent),
     portInfo = new QSerialPortInfo();
     serial = new QSerialPort(this);
     timer = new QTimer(this);
+
     connect(timer, SIGNAL(timeout()), this, SLOT(boxTimer()));
-    timer->start(1000);
+    connect(serial, SIGNAL(readyRead()), this, SLOT(readPort()));
+
+
+    timer->start(2000);
 }
 
 Intro::~Intro(){
@@ -41,9 +45,16 @@ void Intro::wrToPort(char *data){
 void Intro::boxTimer(){
     initValues();
     wrToPort(quest);
+
     wrToPort(unknown);
     wrToPort(currentVals);
     wrToPort(commOff);
+
+}
+
+QByteArray Intro::readPort(){
+    QByteArray ret = serial->readAll();
+    qDebug() << ret;
 }
 
 //
