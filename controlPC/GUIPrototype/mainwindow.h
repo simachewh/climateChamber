@@ -4,6 +4,9 @@
 
 #include <QMainWindow>
 
+#include "controlpc.h"
+#include "communication.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -27,8 +30,12 @@ private slots:
 
     void on_programButton_clicked();
 
+    void on_newDataArived(QByteArray data);
+
 private:
     Ui::MainWindow *ui;
+    ControlPC *controler;
+    Communication *commun;
 };
 
 #endif // MAINWINDOW_H

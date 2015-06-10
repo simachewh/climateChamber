@@ -1,6 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "communication.h"
+#include "controlpc.h"
+#include "chamber.h"
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -9,11 +14,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->stackedWidget->setCurrentIndex(0);
     ui->monitorButton->setEnabled(false);
+    commun = new Communication();
+    commun->openPort();
+    connect(commun, SIGNAL(newData(QByteArray)), this, SLOT(on_newDataArived(QByteArray)));
 
-//    QPalette palette = ui->c1Label->palette();
-//    palette.setColor(ui->c1Label->backgroundRole(), Qt::yellow);
-//    palette.setColor(ui->c1Label->foregroundRole(), Qt::yellow);
-//    ui->c1Label->setPalette(palette);
+    controler = new ControlPC();
+
+    commun->sendData(controler->idelCommand());
+
 }
 
 MainWindow::~MainWindow()
@@ -65,4 +73,7 @@ void MainWindow::on_helpButton_clicked()
     ui->auxButton->setEnabled(true);
 }
 
-
+void MainWindow::on_newDataArived(QByteArray data)
+{
+    qDebug() << "Data" << data;
+}

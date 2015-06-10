@@ -5,3 +5,7 @@ Chamber::Chamber(QWidget *parent) : QWidget(parent)
 
 }
 
+Chamber::~Chamber(){
+
+}
+

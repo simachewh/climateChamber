@@ -255,9 +255,9 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QProgressBar" name="h1ProgressBar">
+            <widget class="QProgressBar" name="t1ProgressBar">
              <property name="value">
-              <number>24</number>
+              <number>0</number>
              </property>
             </widget>
            </item>
@@ -269,9 +269,9 @@
             </widget>
            </item>
            <item row="0" column="3">
-            <widget class="QProgressBar" name="t2ProgressBar">
+            <widget class="QProgressBar" name="h1ProgressBar">
              <property name="value">
-              <number>24</number>
+              <number>0</number>
              </property>
             </widget>
            </item>
@@ -283,23 +283,23 @@
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QProgressBar" name="t1ProgressBar">
+            <widget class="QProgressBar" name="t2ProgressBar">
              <property name="value">
-              <number>24</number>
+              <number>0</number>
              </property>
             </widget>
            </item>
            <item row="1" column="2">
             <widget class="QLabel" name="labelH2Bar">
              <property name="text">
-              <string>&lt;h4&gt;H1&lt;/h4&gt;</string>
+              <string>&lt;h4&gt;H2&lt;/h4&gt;</string>
              </property>
             </widget>
            </item>
            <item row="1" column="3">
             <widget class="QProgressBar" name="h2ProgressBar">
              <property name="value">
-              <number>24</number>
+              <number>0</number>
              </property>
             </widget>
            </item>
