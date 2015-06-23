@@ -50,12 +50,16 @@ public:
      */
     void setDataReceived(QByteArray bytes);
 
-    // Constructors and destructor
+    /**
+     * @brief Communication This constructor initializes the QSerialPort object and
+     * @param parent
+     */
     explicit Communication(QObject *parent = 0);
     ~Communication();
 
 signals:
-    void newData(QByteArray);
+    void newData(QByteArray newData);
+    void dataArived();
 public slots:
     QByteArray readData();
 };

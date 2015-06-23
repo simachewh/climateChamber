@@ -18,7 +18,7 @@ Intro::Intro(QObject *parent) : QObject(parent),
     connect(serial, SIGNAL(readyRead()), this, SLOT(readPort()));
 
 
-    timer->start(2000);
+    timer->start(1000);
 }
 
 Intro::~Intro(){

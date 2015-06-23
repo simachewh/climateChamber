@@ -9,7 +9,7 @@ ControlPC::ControlPC(QObject *parent) : QObject(parent)
     capO = 0x4F;
     qMark = 0x3F;
     lineBreak = 0x0D;
-    command1 = command2 = command3 = command4 = 0x30;
+    commandBlock1 = commandBlock2 = commandBlock3 = commandBlock4 = 0x30;
     iy.i = 0X49;
     iy.y = 0x79;
     aq.a = 0x41;
@@ -58,6 +58,10 @@ QByteArray ControlPC::brCommand(){
 }
 
 QByteArray ControlPC::idelCommand(){
+//    QString zeros(20, zero);
+//    commandBody->append(capO);
+//    commandBody->append(zeros);
+//    commandBody->append(qMark);
     QByteArray * commandIdeal = new QByteArray();
     QString zeros(20, zero);
     commandIdeal->append(stx);
@@ -68,4 +72,15 @@ QByteArray ControlPC::idelCommand(){
     commandIdeal->append(lineBreak);
 
     return *commandIdeal;
+}
+//!maybe good for performance, consider implimenting!//
+QByteArray ControlPC::fullCommand(QString select){
+//    switch (select) {
+//    //!TODO: create and enum for these cases
+//    case "idel":
+
+//        break;
+//    default:
+//        break;
+//    }
 }
